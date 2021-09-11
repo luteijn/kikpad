@@ -200,7 +200,7 @@ EV_NONE,
 EV_ERROR,
 EV_BTN_PRESSED,
 EV_BTN_RELEASED,
-EV_BTN_HOLDED,
+EV_BTN_HELD,
 EV_PAD_PRESSED,
 EV_PAD_RELEASED,
 EV_EC_CW,
@@ -248,7 +248,7 @@ uint8_t ButtonGetLed(uint8_t bt);
 void ButtonsBarSetLedMsk(uint8_t btBar,uint32_t bitMsk);
 uint32_t ButtonsBarGetLedMsk(uint8_t btBar);
 boolean ButtonIsPressed(uint8_t bt);
-boolean ButtonIsHolded(uint8_t bt);
+boolean ButtonIsHeld(uint8_t bt);
 boolean PadIsPressed(uint8_t padIdx);
 
 #endif

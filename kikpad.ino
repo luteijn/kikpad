@@ -175,10 +175,12 @@ volatile uint16_t BtnScanStates[8][11] = {
 
 // Kikpad functionnal module.Uncomment only one.
 
+
+#include "mod_kikpad_io.h"
 //#include "mod_kikpad_demo.h"
 //#include "mod_kikpad_MPC.h"
 //#include "mod_kikpad_MPCClipsTest.h"
-#include "mod_kikpad_MPCClipLauncher.h"
+//#include "mod_kikpad_MPCClipLauncher.h"
 //#include "mod_kikpad_MPCForce.h"
 
 
@@ -469,7 +471,7 @@ void UserEventsTim3Handler() {
                 if (  BtnScanStates[r][c] < BT_HOLD_THRESHOLD ) BtnScanStates[r][c]++;
                 else if (  BtnScanStates[r][c] == BT_HOLD_THRESHOLD ) {
                   BtnScanStates[r][c] ++;
-                  UserEvent_t ev = { .ev = EV_BTN_HOLDED, .d1 = c-8 , .d2 = r } ;
+                  UserEvent_t ev = { .ev = EV_BTN_HELD, .d1 = c-8 , .d2 = r } ;
                   UserEventQueue.write((uint8_t*)&ev,sizeof(UserEvent_t));
                 }
               }
@@ -624,7 +626,7 @@ boolean ButtonIsPressed(uint8_t bt) {
 ///////////////////////////////////////////////////////////////////////////////
 // Get the current holded state of a button (not a pad !)
 ///////////////////////////////////////////////////////////////////////////////
-boolean ButtonIsHolded(uint8_t bt) {
+boolean ButtonIsHeld(uint8_t bt) {
   if (bt >= BT_NB_MAX ) return false;
   // r and c are inversed in the scan array
   uint8_t r = bt/8 ;
@@ -690,7 +692,7 @@ static void ProcessUserEvent(UserEvent_t *ev){
             }
             else
 
-            // UPDATE = HOLD MODE2 & MASTER7 THEN PRESS SET
+            // UPDATE = HOLD BT_CONTROL4 & MASTER7 THEN PRESS SET
             if (  ButtonIsPressed(BT_MS7) ) {
               PadLedStates[0] = PadLedStates[1] = ButtonsLedStates[0] = ButtonsLedStates[1] = 0;
               delay(100);
@@ -799,7 +801,7 @@ void setup() {
   RGBRefreshTim2.resume();
 
   // All Leds On
-  PadLedStates[0] = PadLedStates[1] = ButtonsLedStates[0] = ButtonsLedStates[1] = 0xFFFFFFFF;
+  PadLedStates[0] = PadLedStates[1] = ButtonsLedStates[0] = ButtonsLedStates[1] = 0;
 
   // Show all colors
   for (uint8_t i=0; i != 64 ; i ++ ) PadColorsCurrent[i]=i;

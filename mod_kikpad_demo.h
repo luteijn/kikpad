@@ -161,6 +161,22 @@ void KikpadMod_ProcessUserEvent(UserEvent_t *ev){
             PadSetColor(55, GREEN);
           }
         }
+        
+        else if (keyBoardMap[i] == -3 ) {
+          midiNoteTranspose += 12;
+          if ( midiNoteTranspose > 0) {
+            PadSetColor(48, GREEN);
+            PadSetColor(55, CYAN);
+          }
+          else if ( midiNoteTranspose == 0) {
+            PadSetColor(48, GREEN);
+            PadSetColor(55, GREEN);
+          }
+          else {
+            PadSetColor(48, CYAN);
+            PadSetColor(55, GREEN);
+          }
+        }
       }
 
       break;
@@ -181,6 +197,22 @@ void KikpadMod_ProcessUserEvent(UserEvent_t *ev){
         }
         else if (keyBoardMap[i] == -2 ) {
           midiNoteTranspose += 12;
+          if ( midiNoteTranspose > 0) {
+            PadSetColor(48, GREEN);
+            PadSetColor(55, CYAN);
+          }
+          else if ( midiNoteTranspose == 0) {
+            PadSetColor(48, GREEN);
+            PadSetColor(55, GREEN);
+          }
+          else {
+            PadSetColor(48, CYAN);
+            PadSetColor(55, GREEN);
+          }
+        }
+        
+        else if (keyBoardMap[i] == -3 ) {
+          midiNoteTranspose -= 12;
           if ( midiNoteTranspose > 0) {
             PadSetColor(48, GREEN);
             PadSetColor(55, CYAN);
